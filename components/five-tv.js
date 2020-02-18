@@ -15,7 +15,7 @@ export class FiveTv {
      */
     async getLastNewsList() {
         return this._browser.getContent(this._newsLink, $ => {
-            return $('.scrollingVertBody > a').slice(0, 1).get().map(el =>
+            return $('.scrollingVertBody > a').get().map(el =>
                 (new News())
                     .setTime($(el).find('dt').text())
                     .setTitle($(el).find('dd').text().trim())

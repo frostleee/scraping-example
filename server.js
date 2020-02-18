@@ -4,12 +4,16 @@ import {FiveTv} from "./components/five-tv";
     const fiveTv = new FiveTv();
     const news = await fiveTv.getLastNewsList();
 
-    news[0].view().then(news => {
-        console.log(news.getTitle());
-        console.log(news.getDatetime());
-        console.log(news.getAuthor());
-        console.log(news.getCategory());
-        console.log(news.getViewCounter());
-        console.log(news.getDescription());
-    });
+    let newList = [];
+
+    for (const item of news) {
+        const view = await item.view();
+        const title = item.getTitle();
+        const time = item.getTime();
+        const author = view.getAuthor();
+
+        newList.push(`Дата: ${time}, Автор: ${author}, Заголовок: ${title}`);
+    }
+
+    console.log(newList);
 })();
